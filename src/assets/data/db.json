@@ -1,0 +1,32 @@
+{
+  "cars": [
+    {
+      "id": 2,
+      "model": "Mercedes benz c180",
+      "color": "Azul",
+      "price": 194.9,
+      "ano": 2011
+    },
+    {
+      "id": 3,
+      "model": "Land Rover Range Rover Velar",
+      "color": "Branco",
+      "price": 377.38,
+      "ano": 2012
+    },
+    {
+      "model": "Fista",
+      "color": "Prat",
+      "price": 2000,
+      "ano": 2014,
+      "id": 4
+    },
+    {
+      "model": "Corsa Classic",
+      "color": "Vermelho",
+      "price": 18000,
+      "ano": 2010,
+      "id": 5
+    }
+  ]
+}
