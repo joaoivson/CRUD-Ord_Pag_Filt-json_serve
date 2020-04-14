@@ -16,16 +16,16 @@ export class AppComponent implements OnInit {
   key: string = 'model'; // Define um valor padrão, para quando inicializar o componente
   reverse: boolean = false;
   sort(key) {
-      this.key = key;
-      this.reverse = !this.reverse;
+    this.key = key;
+    this.reverse = !this.reverse;
   }
   public paginaAtual = 1; // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
   car = {} as Car;
   cars: Car[];
-  
 
-  constructor(private carService: CarService) {}
-  
+
+  constructor(private carService: CarService) { }
+
   ngOnInit() {
     this.getCars();
   }
@@ -35,10 +35,12 @@ export class AppComponent implements OnInit {
     if (this.car.id !== undefined) {
       this.carService.updateCar(this.car).subscribe(() => {
         this.cleanForm(form);
+        alert('Registro atualizado com sucesso!');
       });
     } else {
       this.carService.saveCar(this.car).subscribe(() => {
         this.cleanForm(form);
+        alert('Registro incluido com sucesso!');
       });
     }
   }
@@ -52,21 +54,22 @@ export class AppComponent implements OnInit {
 
   // deleta um carro
   deleteCar(car: Car) {
-    this.carService.deleteCar(car).subscribe(() => {
+    if (confirm("Deseja mesmo apagar o carro ID:" + car.id + " - " + car.model + "?")) {
+      this.carService.deleteCar(car).subscribe(() => {
+        this.getCars();
+      });
+    }
+  }
+    // copia o carro para ser editado.
+    editCar(car: Car) {
+      this.car = { ...car };
+    }
+
+    // limpa o formulario
+    cleanForm(form: NgForm) {
       this.getCars();
-    });
-  }
+      form.resetForm();
+      this.car = {} as Car;
+    }
 
-  // copia o carro para ser editado.
-  editCar(car: Car) {
-    this.car = { ...car };
   }
-
-  // limpa o formulario
-  cleanForm(form: NgForm) {
-    this.getCars();
-    form.resetForm();
-    this.car = {} as Car;
-  }
-
-}
